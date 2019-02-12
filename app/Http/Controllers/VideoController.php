@@ -41,18 +41,18 @@ class VideoController extends Controller
     	$video->description = $request->input('description');
 
     	// Subida de imagen
-    	$image = $request->input('image');
+    	$image = $request->file('image');
     	if($image){
-    		$image_path = time().$image->getClientOrinalName();
+    		$image_path = time().$image->getClientOriginalName();
     		\Storage::disk('image')->put($image_path, \File::get($image));
 
     		$video->image = $image_path;
     	}
 
     	// Subida de video
-    	$video_file = $request->input('video');
+    	$video_file = $request->file('video');
     	if($video_file){
-    		$video_path = time().$video_file->getClientOrinalName();
+    		$video_path = time().$video_file->getClientOriginalName();
     		\Storage::disk('videos')->put($video_path, \File::get($video_file));
 
     		$video->video_path = $video_path;

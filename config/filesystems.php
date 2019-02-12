@@ -56,9 +56,9 @@ return [
         ],
 
         //Disco de imagenes
-        'images' => [
+        'image' => [
             'driver' => 'local',
-            'root' => storage_path('app/images'),
+            'root' => storage_path('app/image'),
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
         ],
