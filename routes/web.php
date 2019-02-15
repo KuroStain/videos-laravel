@@ -31,3 +31,9 @@ Route::post('/guardar-video', array(
 	'middleware' 	=> 'auth',
 	'uses' 			=> 'VideoController@saveVideo'
 ));
+
+//Ruta para obtener las miniaturas de los videos
+Route::get('/miniatura/{filename}', array(
+	'as' 	=> 'imageVideo',
+	'uses' 	=> 'VideoController@getImage' 
+));
