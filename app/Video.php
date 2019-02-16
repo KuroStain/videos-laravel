@@ -17,6 +17,6 @@ class Video extends Model
     // Relacion Muchos a Uno
     public function user()
     {
-    	return $this->belongTo('App\User.php', 'user_id');
+    	return $this->belongsTo('App\User.php', 'user_id');
     }
 }

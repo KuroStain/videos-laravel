@@ -1,46 +1,69 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="container">
+
+    <div class="container">
+        <div class="row">
             @if(session('message'))
                 <div class="alert alert-success">
                     {{ session('message') }}
                 </div>
             @endif
-            
+        </div>
+
+        <div class="row">
             <div class="title">
                 <h1 class="display-6">Ultimos videos subidos</h1>
             </div>
-
-            <div id="videos-list">
-                @foreach($videos as $video)
-                    <div class="videos-item col-md-7 fa-pull-left panel panel-default">
-                        <div class="panel-body">
-                            <!-- imagen del video -->
-                            @if(Storage::disk('image')->has($video->image))
-                                <div class="video-image-thumb col-md-2 pull-left">
-                                    <div class="video-image-mask">
-                                        <img class="video-image" src="{{url('/miniatura/'.$video->image)}}"/>
-                                    </div>
-                                </div>
-                            @endif
-
-                            <div class="data">
-                                <h3 class="video-title"><a href="">{{$video->title}}</a></h3>
-                                <p>{{ $video->description }}</p>
-                            </div>
-
-                            <!-- botones de accion -->
-                        </div>
-                    </div>
-                @endforeach
-                </div>
         </div>
 
-        {{$videos->links()}}
+        <hr>
+
+            <!-- Test Tarjeta Bootstrap -->
+
+        <div class="container">
+            <div class="row">
+                <div class="grid"> 
+
+                        @foreach($videos as $video)
+
+                            
+
+                            <div class="card" style="width: 18rem;">
+                                <img class="card-img-top img-thumbnail dimimg" src="{{url('/miniatura/'.$video->image)}}" alt="Card image cap">
+                                <div class="card-body">
+                                    <a href="#" class="video-title">{{$video->title}}</a>
+                                    <p class="card-text">{{ $video->description }}</p>
+                                    
+                                </div>
+                                <div class="card-body">
+                                    {{-- <a href="" class="btn btn-success">Ver</a> --}}
+                                    @guest<!--(Auth::check() && Auth::user()->id == $video->user->id)-->
+                                    @else
+                                        {{--@if(Auth::user()->id == $video->user->id) --}}
+                                            {{--<a href="#" class="btn btn-warning">Editar</a>
+                                            <a href="" class="btn btn-danger">Eliminar</a> --}}
+                                        {{--@endif--}}
+
+                                    @endguest
+                                    
+                                </div>
+                            </div>
+
+                        @endforeach
+
+                </div> 
+            </div>
+        </div>
+            <!-- Fin Test Tarjeta -->     
+        <div class="container">
+            <hr>
+            <div class="row">
+                {{$videos->links()}}
+            </div>
+        </div>
+
 
     </div>
-</div>
+
 @endsection
