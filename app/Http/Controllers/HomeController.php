@@ -29,5 +29,6 @@ class HomeController extends Controller
         return view('home', array(
             'videos' => $videos
         ));
+        
     }
 }

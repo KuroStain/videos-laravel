@@ -13,6 +13,7 @@ use Validator;
 
 use App\Video;
 use App\Comment;
+use App\User;
 
 class VideoController extends Controller
 {
@@ -38,7 +39,7 @@ class VideoController extends Controller
 
     	$video->user_id = $user->id;
     	$video->title = $request->input('title');
-    	$video->description = $request->input('description');
+		$video->description = $request->input('description');
 
     	// Subida de imagen
     	$image = $request->file('image');
