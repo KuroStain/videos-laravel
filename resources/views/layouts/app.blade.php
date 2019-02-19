@@ -96,4 +96,11 @@
     </div>
 
 </body>
+<footer>
+    <div class="container">
+        <hr>
+        <p class="col-md-12 col-md-offset-1 text-muted">Curso Laravel — Camilo Guajardo (黒Stain) 2019</p>
+    </div>
+
+</footer>
 </html>

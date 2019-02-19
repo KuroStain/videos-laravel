@@ -32,7 +32,7 @@
                             <div class="card" style="width: 18rem;">
                                 <img class="card-img-top img-thumbnail dimimg" src="{{url('/miniatura/'.$video->image)}}" alt="Card image cap">
                                 <div class="card-body">
-                                    <a href="#" class="video-title">{{$video->title}}</a>
+                                    <a href="{{ route('videoDetail', ['video_id' => $video->id]) }}" class="video-title">{{$video->title}}</a>
                                     <p class="card-text">{{ substr($video->description,0, 50).' ...' }}</p>
                                     <p class="card-text sub-card-text">[autor]</p>
                                     
