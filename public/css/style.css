@@ -29,6 +29,17 @@
     /*position: absolute;*/
 }
 
+.video-size{
+  width: 100%;
+  /*padding-top: 56.25%;*/
+  position: relative;
+}
+
+.size-panel-superior{
+  height: 30px;
+  align-items: center;
+}
+
 .grid{
     text-align:center;
   }

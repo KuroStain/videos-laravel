@@ -11,6 +11,11 @@ class Comment extends Model
     // Relacion Muchos a Uno
     public function user()
     {
-    	return $this->belongTo('App\User.php', 'user_id');
+    	return $this->belongsTo('App\User', 'user_id');
+    }
+
+    public function video()
+    {
+    	return $this->belongsTo('App\Video', 'video_id');
     }
 }

@@ -14,6 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -48,4 +49,25 @@ Route::get('/video/{video_id}', array(
 Route::get('/video-file/{filename}', array(
 	'as'	=>'fileVideo',
 	'uses'	=>'VideoController@getVideo'
+));
+
+//Ruta guardar comentarios
+Route::post('/comment', array(
+	'as' 			=>'saveComment',
+	'middleware' 	=> 'auth',
+	'uses' 			=> 'CommentController@store'
+));
+
+//Ruta eliminar comentarios
+Route::get('/delete-comment/{comment_id}', array(
+	'as' 			=>'deleteComment',
+	'middleware' 	=> 'auth',
+	'uses' 			=> 'CommentController@delete'
+));
+
+//Ruta eliminar videos
+Route::get('/delete-video/{video_id}', array(
+	'as' 			=>'deleteVideo',
+	'middleware' 	=> 'auth',
+	'uses' 			=> 'VideoController@delete'
 ));

@@ -34,7 +34,7 @@
                                 <div class="card-body">
                                     <a href="{{ route('videoDetail', ['video_id' => $video->id]) }}" class="video-title">{{$video->title}}</a>
                                     <p class="card-text">{{ substr($video->description,0, 50).' ...' }}</p>
-                                    <p class="card-text sub-card-text">[autor]</p>
+                                    <p class="card-text sub-card-text">{{$video->user->name}}</p>
                                     
                                 </div>
                                 <div class="card-body">
