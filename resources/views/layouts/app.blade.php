@@ -40,15 +40,17 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto align-items-center">
-                        <form class="navbar-form navbar-left" role="search" action="">
-                            <div class="form-group d-flex">
-                                <input type="text" name="search" class="form-control" placeholder="¿Que quieres ver?"/>
-                                <button type="submit" class="btn btn-light">
-                                    <span class="fas fa-search"></span>
-                                </button>
-                            </div>     
-                        </form>
+                    <ul class="navbar-nav mr-auto pt-3">
+                        <li class="nav-item">
+                            <form class="navbar-form navbar-left" role="search" action="">
+                                <div class="form-group d-flex">
+                                    <input type="text" name="search" class="nav-item form-control" placeholder="¿Que quieres ver?"/>
+                                    <button type="submit" class="btn btn-light">
+                                        <span class="fas fa-search"></span>
+                                    </button>
+                                </div>     
+                            </form>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -86,6 +88,7 @@
                                 </div>
                             </li>
                         @endguest
+                        
                     </ul>
                 </div>
             </div>

@@ -28,7 +28,7 @@
 							<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 								<!-- listado desplegable -->
 								<a class="dropdown-item" href="#deleteVideo{{$video->id}}" data-target="#deleteVideo{{$video->id}}" data-toggle="modal">Eliminar</a>
-								<a class="dropdown-item" href="#" data-target="#" data-toggle="modal">Modificar</a>
+								<a class="dropdown-item" href="{{url('/edit-video/'.$video->id)}}">Modificar</a>
 							</div>
 						</div>
 

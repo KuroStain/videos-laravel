@@ -62,9 +62,7 @@ class VideoController extends Controller
     	$video->save();
 
     	return redirect()->route('home')->with(array(
-
     		'message' => 'El video se guardo correctamente'
-
 		));
 
 	}
@@ -92,31 +90,87 @@ class VideoController extends Controller
 	// Funcion para eliminar un video
 	public function delete($video_id)
 	{
-		$user = \Auth::user();
-		$video = Video::find($video_id);
-
-		$comment = Comment::where('video_id', $video_id)->get();
+		$user 		= \Auth::user();
+		$video 		= Video::find($video_id);
+		$comments 	= Comment::where('video_id', $video_id)->get();
+		
+		//var_dump($comments->body);exit;
 
 		if($user && $video->user_id == $user->id){
-
+			
 			// Eliminar comentarios
-			if($comments && count($comments) >= 1){
-				foreach ($comments as $comment) {
-					$comments->delete();
-				}
+			if($comments && sizeof($comments) >=1 ){
+				Comment::where('video_id',$video_id)->delete();
 			}
-			// Eliminar miniatura
+
+			 //Eliminar miniatura
 			Storage::disk('image')->delete($video->image);
 			Storage::disk('videos')->delete($video->video_path);
+
 			// Eliminar Video
 			$video->delete();
 
-			$message = array('message' => 'Video eliminado correctamente');
+			$message = array(
+				'message' => 'Video eliminado correctamente');
 		}else {
-			$message = array('message' => 'Video no fue eliminado');
+			abort(404);
 		}
 
 		return redirect()->route('home')->with(array('$message'));
+	}
+
+	// Funcion para obtener el video a editar
+	public function edit($video_id)
+	{
+		$user 	= \Auth::user();
+		$video	= Video::findOrFail($video_id);
+
+		if ($user && $video->user_id == $user->id){
+			return view('video.editVideo', array ('video' => $video));
+		}
+
+	}
+
+	// Funcion para Update al video
+	public function update($video_id, Request $request)
+	{
+		Validator::make($request->all(),[
+    		'title'			=>'required|string|max:255|min:1',
+    		'description'	=>'required|max:2048|min:1',
+    		'image' 		=> 'mimes:jpeg,bmp,png',
+    		'video'			=> 'mimes:mp4,avi'])->validate();
+
+		$user = \Auth::user();
+		$video = Video::findOrFail($video_id);
+
+    	$video->user_id = $user->id;
+    	$video->title = $request->input('title');
+		$video->description = $request->input('description');
+
+    	// Subida de imagen
+    	$image = $request->file('image');
+    	if($image){
+    		$image_path = time().$image->getClientOriginalName();
+    		\Storage::disk('image')->put($image_path, \File::get($image));
+
+    		$video->image = $image_path;
+    	}
+
+    	// Subida de video
+    	$video_file = $request->file('video');
+    	if($video_file){
+    		$video_path = time().$video_file->getClientOriginalName();
+    		\Storage::disk('videos')->put($video_path, \File::get($video_file));
+
+    		$video->video_path = $video_path;
+		}
+		
+		$video->update();
+
+		return redirect()->route('home')->with(array(
+			'message' => 'El video se actualizo correctamente'
+		));
+
 	}
 	
 }

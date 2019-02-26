@@ -26,28 +26,17 @@
                 <div class="grid"> 
 
                         @foreach($videos as $video)
-
-                            
-
-                            <div class="card" style="width: 18rem;">
-                                <img class="card-img-top img-thumbnail dimimg" src="{{url('/miniatura/'.$video->image)}}" alt="Card image cap">
-                                <div class="card-body">
+                        
+                            <div class="card">
+                                <div class="top-img">
+                                    <div class="full-img">
+                                        <img class="card-img-top img-thumbnail dimimg" src="{{url('/miniatura/'.$video->image)}}" alt="Card image cap">
+                                </div>
+                            </div>
+                            <div class="card-body">
                                     <a href="{{ route('videoDetail', ['video_id' => $video->id]) }}" class="video-title">{{$video->title}}</a>
                                     <p class="card-text">{{ substr($video->description,0, 50).' ...' }}</p>
-                                    <p class="card-text sub-card-text">{{$video->user->name}}</p>
-                                    
-                                </div>
-                                <div class="card-body">
-                                    {{-- <a href="" class="btn btn-success">Ver</a> --}}
-                                    @guest<!--(Auth::check() && Auth::user()->id == $video->user->id)-->
-                                    @else
-                                        {{--@if(Auth::user()->id == $video->user->id) --}}
-                                            {{--<a href="#" class="btn btn-warning">Editar</a>
-                                            <a href="" class="btn btn-danger">Eliminar</a> --}}
-                                        {{--@endif--}}
-
-                                    @endguest
-                                    
+                                    <p class="card-text sub-card-text">{{$video->user->name}}</p>                                   
                                 </div>
                             </div>
 

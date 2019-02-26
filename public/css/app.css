@@ -3188,7 +3188,7 @@ input[type="submit"].btn-block {
 .custom-file-input {
     position: relative;
     width: 100%;
-    height: calc(2.19rem + 2px);
+    min-height: calc(2.19rem + 2px);
 }
 .custom-file-input {
     z-index: 2;
