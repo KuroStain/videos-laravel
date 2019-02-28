@@ -85,3 +85,15 @@ Route::post('/update-video/{video_id}', array(
 	'middleware' 	=> 'auth',
 	'uses' 			=> 'VideoController@update'
 ));
+
+//Ruta search video
+Route::get('/search-video/{search?}', array(
+	'as' 			=>'searchVideo',
+	'uses' 			=> 'VideoController@search'
+));
+
+//Ruta obtener usuario para canal
+Route::get('/channel/{user_id}', array(
+	'as'	=>'channelUser',
+	'uses'	=>'ChannelController@getChannel'
+));

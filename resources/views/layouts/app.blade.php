@@ -42,7 +42,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto pt-3">
                         <li class="nav-item">
-                            <form class="navbar-form navbar-left" role="search" action="">
+                            <form class="navbar-form navbar-left" role="search" action="{{ url('/search-video') }}">
                                 <div class="form-group d-flex">
                                     <input type="text" name="search" class="nav-item form-control" placeholder="¿Que quieres ver?"/>
                                     <button type="submit" class="btn btn-light">

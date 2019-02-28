@@ -13,7 +13,7 @@
 
         <div class="row">
             <div class="title">
-                <h1 class="display-6">Ultimos videos subidos</h1>
+                <h2>Resultados de Busqueda: {{$search}}</h2>
             </div>
         </div>
 
@@ -24,3 +24,5 @@
     </div>
 
 @endsection
+
+

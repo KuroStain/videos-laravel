@@ -127,6 +127,8 @@ class VideoController extends Controller
 
 		if ($user && $video->user_id == $user->id){
 			return view('video.editVideo', array ('video' => $video));
+		}else {
+			return redirect()->route('home');
 		}
 
 	}
@@ -137,8 +139,8 @@ class VideoController extends Controller
 		Validator::make($request->all(),[
     		'title'			=>'required|string|max:255|min:1',
     		'description'	=>'required|max:2048|min:1',
-    		'image' 		=> 'mimes:jpeg,bmp,png',
-    		'video'			=> 'mimes:mp4,avi'])->validate();
+    		'image' 		=>'mimes:jpeg,bmp,png',
+    		'video'			=>'required|mimes:mp4,avi'])->validate();
 
 		$user = \Auth::user();
 		$video = Video::findOrFail($video_id);
@@ -147,7 +149,10 @@ class VideoController extends Controller
     	$video->title = $request->input('title');
 		$video->description = $request->input('description');
 
-    	// Subida de imagen
+		$image_temp = $video->image_path;
+		$video_temp = $video->video_path;
+
+		// Subida de imagen
     	$image = $request->file('image');
     	if($image){
     		$image_path = time().$image->getClientOriginalName();
@@ -156,7 +161,7 @@ class VideoController extends Controller
     		$video->image = $image_path;
     	}
 
-    	// Subida de video
+		// Subida de video
     	$video_file = $request->file('video');
     	if($video_file){
     		$video_path = time().$video_file->getClientOriginalName();
@@ -167,10 +172,32 @@ class VideoController extends Controller
 		
 		$video->update();
 
+		Storage::disk('image')->delete($image_temp);
+		Storage::disk('videos')->delete($video_path);
+
 		return redirect()->route('home')->with(array(
 			'message' => 'El video se actualizo correctamente'
 		));
 
+	}
+
+	public function search($search = null)
+	{
+		//print_r('hola');
+		//var_dump($search);
+		$test = $_GET['search'];
+		//var_dump($test);
+		
+		//exit;
+		if (is_null($test)) {
+			$test = \Request::get('search');
+			return redirect()->route('searchVideo', array('search', $test));
+		}
+		$videos = Video::where('title', 'LIKE', '%'.$test.'%')->paginate(8);
+		return view('video.searchVideo', array(
+			'videos' => $videos,
+			'search' => $test
+		));
 	}
 	
 }

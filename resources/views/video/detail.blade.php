@@ -55,7 +55,7 @@
 					@endif
 					<!-- fin dropdown -->
 
-					<p class="card-text ml-3">Video subido por <strong>{{$video->user->name}} </strong> {{ \FormatTime::LongTimeFilter($video->created_at) }}</p>
+					<p class="card-text ml-3">Video subido por <a href="{{ route('channelUser', ['user_id' => $video->user->id]) }}" class="card-text sub-card-text">{{$video->user->name}}</a> {{ \FormatTime::LongTimeFilter($video->created_at) }}</p>
 					
 				</div>
 
